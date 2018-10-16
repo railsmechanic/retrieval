@@ -128,7 +128,7 @@ defmodule Retrieval do
   defp _prefix(trie, "", acc) do
     Enum.flat_map(trie, fn
       {:mark, :mark} -> [acc]
-      {ch, sub_trie} -> _prefix(sub_trie, "", acc <> ch)
+      {ch, sub_trie} -> _prefix(sub_trie, "", acc <> <<ch>>)
     end)
   end
 
