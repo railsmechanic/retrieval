@@ -125,12 +125,12 @@ defmodule Retrieval do
   # An interesting discovery I made here is that treating the accumulator as a binary is actually quicker
   # than converting the prefix to a char list, prepending to it, reversing when a word is found, and converting
   # to a binary.
-  defp _prefix(trie, "", acc) do
-    IO.inspect acc
+  defp _prefix(trie, <<>>, acc) do
     Enum.flat_map(trie, fn
       {:mark, :mark} -> [acc]
-      {ch, sub_trie} -> _prefix(sub_trie, "", acc <> <<ch>>)
+      {ch, sub_trie} -> _prefix(sub_trie, <<>>, acc <> <<ch>>)
     end)
   end
+
 
 end
