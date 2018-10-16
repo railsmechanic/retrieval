@@ -115,7 +115,7 @@ defmodule Retrieval do
     _prefix(trie, binary, binary)
   end
 
-  def _prefix(trie, <<next::binary-size(1), rest::binary>>, acc) do
+  defp _prefix(trie, <<next::binary-size(1), rest::binary>>, acc) do
     case Map.has_key?(trie, next) do
       true  -> _prefix(trie[next], rest, acc)
       false -> []
@@ -125,7 +125,7 @@ defmodule Retrieval do
   # An interesting discovery I made here is that treating the accumulator as a binary is actually quicker
   # than converting the prefix to a char list, prepending to it, reversing when a word is found, and converting
   # to a binary.
-  def _prefix(trie, "", acc) do
+  defp _prefix(trie, "", acc) do
     Enum.flat_map(trie, fn
       {:mark, :mark} -> [acc]
       {ch, sub_trie} -> _prefix(sub_trie, "", acc <> ch)
