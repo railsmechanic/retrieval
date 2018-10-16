@@ -112,6 +112,7 @@ defmodule Retrieval do
   """
 
   def prefix(%Trie{trie: trie}, binary) when is_binary(binary) do
+    IO.inspect("lulu")
     _prefix(trie, binary, binary)
   end
 
